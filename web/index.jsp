@@ -52,13 +52,13 @@
       font-family: Helvetica;
       letter-spacing: 0.4em;
       font-weight: 600;
-      font-size: 50px;
+      font-size: 20px;
       text-align: center;
       color: #202125;
       cursor: pointer;
       max-width: 500px;
       width: 100%;
-      outline: 70px solid;
+      outline: 30px solid;
       outline-color: rgba(71, 126, 232,0.5);
       outline-offset: 10px;
       transition: all 600ms cubic-bezier(0.2, 0.5, 0, 0.8);
@@ -93,7 +93,7 @@
 
   </style>
 </head>
-<body>
+<body onload="canvasInit()">
 <table border="1" cellpadding="4" cellspacing="4">
   <tr>
     <td colspan="2" height="20%">
@@ -141,12 +141,15 @@
           <td width="60%">
             <p align="right"><div class="container"><button type="submit" class="animated-word"
                                                             onclick="submit()">Check</button></div></p>
+            <p align="right"><div class="container"><button type="submit" class="animated-word"
+                                                            onclick="submit_clear()">Delete data from table</button></div></p>
           </td>
         </tr>
       </table>
     </td>
     <td width="10px" height="10px">
-      <img src="resourses/grap.png" alt="Координатная плоскость" class="diagram">
+<%--      <img src="resourses/grap.png" alt="Координатная плоскость" class="diagram">--%>
+          <canvas id="chart" width="300px" height="300px"></canvas>
     </td>
   </tr>
   <tr>
@@ -195,6 +198,7 @@
 
 </table>
 <script src="js-scripts/validation.js"></script>
+<script src="js-scripts/canvas.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

@@ -42,32 +42,6 @@ function submit() {
     $('#logs-request').empty();
 
     if (validateX() & validateY() & validateR()) {
-        // let request = new XMLHttpRequest();
-        // let formData = new FormData();
-        // formData.append("x", X);
-        // formData.append("y", Y);
-        // formData.append("r", R);
-        // formData.append('timezone', new Date().getTimezoneOffset());
-        // request.open('post', "/filter", true)
-        // request.overrideMimeType("application/json");
-        // request.onload = function () {
-        //     console.log(request.responseText);
-        //     let arr = JSON.parse(request.responseText);
-        //     arr.forEach(function (elem) {
-        //         if (!elem.validate) {
-        //             return;
-        //         }
-        //         let newRow = elem.isHit ? '<tr class="green" height="60px">' : '<tr class="red" height="60px">';
-        //         newRow += '<td>' + elem.x + '</td>';
-        //         newRow += '<td>' + elem.y + '</td>';
-        //         newRow += '<td>' + elem.r + '</td>';
-        //         newRow += '<td>' + elem.currentTime + '</td>';
-        //         newRow += '<td>' + elem.execTime + '</td>';
-        //         newRow += '<td>' + (elem.isHit ? 'Попадание' : 'Промах') + '</td>';
-        //         $('#tableWithResults tr:first').after(newRow);
-        //     })
-        // };
-        // request.send(formData);
         $.post("/filter", {
             'x': X,
             'y': Y,
@@ -79,13 +53,28 @@ function submit() {
             row += '<td><b>' + parseFloat(arr.x.toFixed(8)) + '</b></td>';
             row += '<td><b>' + parseFloat(arr.y.toFixed(8)) + '</b></td>';
             row += '<td><b>' + parseFloat(arr.r.toFixed(8)) + '</b></td>';
-            row += '<td><b>' + arr.isHit + '</b></td>';
             row += '<td><b>' + parseFloat(arr.execTime.toFixed(8)) + '</b></td>';
             row += '<td><b>' + arr.currentTime + '</b></td>';
+            row += '<td><b>' + arr.isHit + '</b></td>';
             row += '</tr>';
             $('#tableWithResults tr:first').after(row);
         }).fail(function (err) {
             alert(err);
         });
     }
+}
+
+function submit_clear() {
+    $('#logs-request').empty();
+    showErrorToLog("Удаляю данные");
+
+    $.post("filter", {
+        'clear': true
+    }).done(function (data) {
+        $('#logs-request').empty();
+        showErrorToLog("Data has been deleted");
+    }).fail(function (err) {
+        $('#logs-request').empty();
+        showErrorToLog(err);
+    })
 }
