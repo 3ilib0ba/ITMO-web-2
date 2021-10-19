@@ -114,7 +114,7 @@
           </td>
           <td width="70%" height="40%">
             <h7>Choose a parameter R:</h7>
-            <select id="coordinateR" name="coordinateR">
+            <select id="coordinateR" name="coordinateR" onclick="changeR()">
               <option value="1">1</option>
               <option value="1.5">1.5</option>
               <option value="2">2</option>
