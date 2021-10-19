@@ -14,8 +14,8 @@ function drawAreas() {
 
     //draw triangle
     chart.beginPath();
-    chart.moveTo(width / 2, height / 2 + valR);
-    chart.lineTo((width + valR) / 2, height / 2);
+    chart.moveTo(width / 2, height / 2 - valR);
+    chart.lineTo((width - valR) / 2, height / 2);
     chart.lineTo(width / 2, height / 2);
     chart.fill();
 
@@ -28,7 +28,7 @@ function drawAreas() {
     chart.fillStyle = 'blue';
     chart.strokeStyle = 'blue';
     chart.globalAlpha = 0.6;
-    chart.arc(width / 2, height / 2, valR / 2, Math.PI, Math.PI * 1.5);
+    chart.arc(width / 2, height / 2, valR, Math.PI * 0.5, Math.PI);
     chart.lineTo(width / 2, height / 2)
     chart.fill();
     chart.stroke();
