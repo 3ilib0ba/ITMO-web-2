@@ -87,10 +87,10 @@ function drawAxis() {
 function drawShoot(x, y, isHit) {
     let canvas = document.getElementById('chart');
     let chart = canvas.getContext('2d');
-    console.log(isHit, '2');
+    console.log(isHit);
     let color;
-    if (isHit === 'Да') {
-        color = 'green';
+    if (isHit === 'true') {
+        color = 'lightgreen';
     } else {
         color = 'red';
     }
@@ -107,6 +107,23 @@ function canvasInit() {
     let canvas = document.getElementById('chart');
     canvas.addEventListener('mousedown', event => clickOnChart(canvas, event));
     drawAxis();
+
+    // draw saved dotes
+    let tableInfo = Array.prototype.map.call(document.querySelectorAll('#tableWithResults tr'), function(tr){
+        return Array.prototype.map.call(tr.querySelectorAll('td'), function(td){
+            return td.innerHTML;
+        });
+    });
+
+    let X, Y;
+    for (let i = 1; i < tableInfo.length; i++) {
+        console.log(tableInfo[i][0] + " --- " + tableInfo[i][1] + " --- " + tableInfo[i][2] + " --- " + tableInfo[i][5]);
+        X = parseFloat(tableInfo[i][0]);
+        Y = parseFloat(tableInfo[i][1]);
+        let coordinates = mapCoordinates(X, Y);
+        //console.log("X = " + X + ", Y = " + Y);
+        drawShoot(coordinates.x, coordinates.y, tableInfo[i][5]);
+    }
 }
 
 function mapCoordinates(x, y) {

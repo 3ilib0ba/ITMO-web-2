@@ -99,7 +99,7 @@ public class Shot {
             correct = false;
             return;
         }
-        if (x <= 0 && y >= 0 && (y + 2 * x <= r)) {
+        if (x <= 0 && y >= 0 && (y - 2 * x <= r)) {
             correct = true;
             return;
         }

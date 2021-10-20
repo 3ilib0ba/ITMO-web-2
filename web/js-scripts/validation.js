@@ -1,4 +1,5 @@
 let X, R, Y;
+let isCorr;
 
 function validateX() {
     if (document.querySelector('input[name="coordinateX"]:checked') !== null) {
@@ -44,9 +45,7 @@ function clickOnChart(canvas, event) {
     let y = (height / 2 - event.clientY + rect.top) / scale;
     let r = $("#coordinateR").val();
     console.log("x = " + x + ", y = " + y + ", r = " + r);
-    shoot(x, y, r).then(function (answer) {
-        drawShoot(event.clientX - rect.left, event.clientY - rect.top, answer.isHit);
-    });
+    shoot(x, y, r);
 }
 
 function changeR() {
@@ -54,14 +53,8 @@ function changeR() {
 }
 
 async function shoot(valX, valY, valR) {
-    let isHit = 'Нет';
-    //if (validateY(valY) && validateX(valX)) {
-        await submit_request(valX, valY, valR);
-    //} else {
-    //    return new Answer('Y должен лежать в интервале (-5;5)', isHit);
-    //}
-    console.log(isHit + '1');
-    return new Answer('', isHit);
+    submit_request(valX, valY, valR);
+    console.log("При нажатии на график");
 }
 
 class Answer {
@@ -75,11 +68,12 @@ function showErrorToLog(message) {
     document.getElementById("logs-request").append(message)
 }
 
-function submit() {
+async function submit() {
     $('#logs-request').empty();
 
     if (validateX() & validateY() & validateR()) {
         submit_request(X, Y, R);
+        console.log("При отправке с формы");
     }
 }
 
@@ -92,17 +86,17 @@ function submit_request(X, Y, R) {
     }).done(function (data) {
         arr = JSON.parse(data);
         row = '<tr>';
-        row += '<td><b>' + parseFloat(arr.x.toFixed(8)) + '</b></td>';
-        row += '<td><b>' + parseFloat(arr.y.toFixed(8)) + '</b></td>';
-        row += '<td><b>' + parseFloat(arr.r.toFixed(8)) + '</b></td>';
-        row += '<td><b>' + parseFloat(arr.execTime.toFixed(8)) + '</b></td>';
+        row += '<td>' + parseFloat(arr.x.toFixed(8)) + '</td>';
+        row += '<td>' + parseFloat(arr.y.toFixed(8)) + '</td>';
+        row += '<td>' + parseFloat(arr.r.toFixed(8)) + '</td>';
         row += '<td><b>' + arr.currentTime + '</b></td>';
-        row += '<td><b>' + arr.isHit + '</b></td>';
+        row += '<td><b>' + parseFloat(arr.execTime.toFixed(8)) + '</b></td>';
+        row += '<td>' + arr.isHit + '</td>';
         row += '</tr>';
         $('#tableWithResults tr:first').after(row);
-        if (arr.isHit === "true") {
-            return "Да";
-        }
+
+        let coordinates = mapCoordinates(arr.x, arr.y);
+        drawShoot(coordinates.x, coordinates.y, arr.isHit);
     }).fail(function (err) {
         alert(err);
     });
@@ -112,7 +106,7 @@ function submit_clear() {
     $('#logs-request').empty();
     showErrorToLog("Удаляю данные");
 
-    $.post("filter", {
+    $.post("/filter", {
         'clear': true
     }).done(function (data) {
         $('#logs-request').empty();

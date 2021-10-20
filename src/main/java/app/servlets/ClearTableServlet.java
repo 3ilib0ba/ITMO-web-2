@@ -12,5 +12,6 @@ public class ClearTableServlet extends HttpServlet {
         System.out.println("Delete servlet  start");
 
         request.getServletContext().setAttribute("hits", null);
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

@@ -182,12 +182,12 @@
               double y = hits.get(i).getY();
               double r = hits.get(i).getR();
               NumberFormat nf = new DecimalFormat("#.########");
-              out.println("<td><b>" + nf.format(x).replace(",", ".") + "</b></td>");
-              out.println("<td><b>" + nf.format(y).replace(",", ".") + "</b></td>");
-              out.println("<td><b>" + nf.format(r).replace(",", ".") + "</b></td>");
+              out.println("<td>" + nf.format(x).replace(",", ".") + "</td>");
+              out.println("<td>" + nf.format(y).replace(",", ".") + "</td>");
+              out.println("<td>" + nf.format(r).replace(",", ".") + "</td>");
               out.println("<td><b>" + hits.get(i).getLocalDateTime() + "</b></td>");
               out.println("<td><b>" + nf.format(hits.get(i).getExecTime()).replace(",", ".") + "</b></td>");
-              out.println("<td><b>" + hits.get(i).getCorrect() + "</b></td>");
+              out.println("<td>" + hits.get(i).getCorrect() + "</td>");
               out.println("</tr>");
             }
           }
