@@ -78,7 +78,7 @@ async function submit() {
 }
 
 function submit_request(X, Y, R) {
-    $.post("/filter", {
+    $.post("filter", {
         'x': X,
         'y': Y,
         'r': R,
@@ -106,7 +106,7 @@ function submit_clear() {
     $('#logs-request').empty();
     showErrorToLog("Удаляю данные");
 
-    $.post("/filter", {
+    $.post("filter", {
         'clear': true
     }).done(function (data) {
         $('#logs-request').empty();
