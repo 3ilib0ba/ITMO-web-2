@@ -30,8 +30,9 @@
 ---
 
 Сама код программы представлен можно взять из источников: 
-https://github.com/3ilib0ba/web-lab-2
-https://clck.ru/YKoT3
+
++ https://github.com/3ilib0ba/web-lab-2
++ https://clck.ru/YKoT3
 
 ---
 
