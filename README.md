@@ -25,7 +25,11 @@
 
 **Условие варианта:**
 
+![image](https://user-images.githubusercontent.com/51972750/151852374-386ee5e2-c60d-4861-9150-906cf85cd08a.png)
 
+![image](https://user-images.githubusercontent.com/51972750/151852443-98164fc9-fa3e-4781-828d-bfbf9a44e53f.png)
+
+![image](https://user-images.githubusercontent.com/51972750/151852478-e0f0a532-db1f-4836-bab7-20be70bc5fe1.png)
 
 ---
 
